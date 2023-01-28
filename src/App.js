@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+//pages
+import Home from "./pages/Home";
+import About from "./pages/About";
+//Not-found
+import NotFound404 from "./pages/Notfound";
 
 function App() {
+  const AquaRoutes = [
+    {
+      name: "Home",
+      path: "/",
+      component: <Home />,
+    },
+    {
+      name: "About",
+      path: "/about",
+      component: <About />,
+    },
+    {
+      name: "404-Not-Found",
+      path: "*",
+      component: <NotFound404 />,
+    },
+  ];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {AquaRoutes.map((r, i) => (
+          <Route path={r.path} element={r.component} key={r.name} />
+        ))}
+      </Routes>
+    </Router>
   );
 }
 
